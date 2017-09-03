@@ -1,39 +1,36 @@
-[submodule "bundle/limelight"]
-	path = bundle/limelight
-	url = https://github.com/junegunn/limelight.vim.git
 [submodule "bundle/goyo"]
 	path = bundle/goyo
-	url = https://github.com/junegunn/goyo.vim.git
+	url = https://github.com/junegunn/goyo.vim
+[submodule "bundle/limelight"]
+	path = bundle/limelight
+	url = https://github.com/junegunn/limelight.vim
 [submodule "bundle/python-syntax"]
 	path = bundle/python-syntax
-	url = https://github.com/vim-python/python-syntax.git
-[submodule "bundle/vim-surround"]
-	path = bundle/vim-surround
-	url = https://github.com/tpope/vim-surround.git
-[submodule "bundle/vim-gitgutter"]
-	path = bundle/vim-gitgutter
-	url = https://github.com/airblade/vim-gitgutter.git
-[submodule "bundle/nerdcommenter"]
-	path = bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "bundle/tagbar"]
-	path = bundle/tagbar
-	url = https://github.com/majutsushi/tagbar
+	url = https://github.com/vim-python/python-syntax
+[submodule "bundle/swift"]
+	path = bundle/swift
+	url = https://github.com/apple/swift
 [submodule "bundle/javascript"]
 	path = bundle/javascript
 	url = https://github.com/pangloss/vim-javascript
-[submodule "bundle/vim-commentary"]
-	path = bundle/vim-commentary
-	url = https://github.com/tpope/vim-commentary.git
-[submodule "bundle/vim-multiple-cursors"]
-	path = bundle/vim-multiple-cursors
+[submodule "bundle/commentary"]
+	path = bundle/commentary
+	url = https://github.com/tpope/vim-commentary
+[submodule "bundle/multiple-cursors"]
+	path = bundle/multiple-cursors
 	url = https://github.com/terryma/vim-multiple-cursors
+[submodule "bundle/gitgutter"]
+	path = bundle/gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "bundle/surround"]
+	path = bundle/surround
+	url = https://github.com/tpope/vim-surround
+[submodule "bundle/tagbar"]
+	path = bundle/tagbar
+	url = https://github.com/majutsushi/tagbar
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/sirver/ultisnips
 [submodule "bundle/deoplete"]
 	path = bundle/deoplete
 	url = https://github.com/shougo/deoplete.nvim
-[submodule "bundle/swift"]
-	path = bundle/swift
-	url = https://github.com/apple/swift
