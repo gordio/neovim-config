@@ -7,9 +7,6 @@
 [submodule "bundle/python-syntax"]
 	path = bundle/python-syntax
 	url = https://github.com/vim-python/python-syntax
-[submodule "bundle/swift"]
-	path = bundle/swift
-	url = https://github.com/apple/swift
 [submodule "bundle/javascript"]
 	path = bundle/javascript
 	url = https://github.com/pangloss/vim-javascript
@@ -34,3 +31,24 @@
 [submodule "bundle/deoplete"]
 	path = bundle/deoplete
 	url = https://github.com/shougo/deoplete.nvim
+[submodule "bundle/auto-pairs"]
+	path = bundle/auto-pairs
+	url = https://github.com/jiangmiao/auto-pairs
+[submodule "bundle/swiftdoc"]
+	path = bundle/swiftdoc
+	url = https://github.com/aciidb0mb3r/SwiftDoc.vim
+[submodule "bundle/autocomplete-swift"]
+	path = bundle/autocomplete-swift
+	url = https://github.com/mitsuse/autocomplete-swift
+[submodule "bundle/neomake"]
+	path = bundle/neomake
+	url = https://github.com/neomake/neomake
+[submodule "bundle/deoplete-swift"]
+	path = bundle/deoplete-swift
+	url = https://github.com/landaire/deoplete-swift.git
+[submodule "bundle/gutentags"]
+	path = bundle/gutentags
+	url = https://github.com/ludovicchabant/vim-gutentags
+[submodule "bundle/ctrlp"]
+	path = bundle/ctrlp
+	url = https://github.com/ctrlpvim/ctrlp.vim.git

@@ -8,10 +8,10 @@ set timeoutlen=500 ttimeoutlen=10
 filetype off
 call pathogen#infect()
 call pathogen#helptags()
-let python_version_2 = 0
-let python_highlight_all = 1
 filetype plugin indent on
 syntax on
+let python_version_2 = 0
+let python_highlight_all = 1
 
 set wildmenu " display all matching files when we tab complete
 set list listchars=tab:❯\ ,trail:×
@@ -21,16 +21,16 @@ let g:netrw_banner=0 " Remove help info
 let g:netrw_altv=1	 " Open split at right
 let g:netrw_liststyle=3
 
-set nobackup		  "don't save backup files
+set nobackup			"don't save backup files
 set number numberwidth=5
-set hlsearch		  "highlight search matches
+set hlsearch			"highlight search matches
 set ignorecase smartcase
-set hidden			  "allow hiding buffers which have modifications
-set linebreak		  "break lines, not words
-set breakindent		  "break lines while preserving indentation
-set showbreak=…		  "prepend ellipsis and 2 spaces at break
-set laststatus=2	  "always show status
-set backspace=2		  " make backspace work
+set hidden				"allow hiding buffers which have modifications
+set linebreak			"break lines, not words
+set breakindent			"break lines while preserving indentation
+set showbreak=…			"prepend ellipsis and 2 spaces at break
+set laststatus=2		"always show status
+set backspace=2			" make backspace work
 
 
 "default indentation
@@ -40,7 +40,7 @@ set textwidth=0 wrapmargin=0 " don't auto wrap
 set colorcolumn=80
 
 "default files
-set wildignore+=*.o,*.obj,*.pyc,*.pyo
+set wildignore+=*.o,*.obj,*.pyc,*.pyo,*~
 
 "indent selection
 xnoremap <Tab> >gv
@@ -109,43 +109,43 @@ endfu
 fu! SLUpdateColor(mode)
 	if a:mode == 'i'
 		hi sl_mode ctermbg=2 guibg=#094afe
-		hi sl_minor ctermfg=0 ctermbg=243
 	elseif a:mode == 'r'
 		hi sl_mode ctermbg=9 guibg=#094afe
-		hi sl_minor ctermfg=0 ctermbg=243
 	elseif a:mode == 'v'
 		hi sl_mode ctermbg=13 guibg=#094afe
-		hi sl_minor ctermfg=0 ctermbg=243
 	else
 		hi sl_mode ctermbg=4 guibg=#094afe
-		hi sl_minor ctermfg=0 ctermbg=243
 	endif
 	return ''
 endfu
 
 "defaults
-hi StatusLine ctermfg=0 ctermbg=243 guibg=DarkGrey guifg=White
+hi StatusLine ctermfg=0 ctermbg=7 cterm=none guibg=DarkGrey guifg=White
 hi StatusLineNC ctermfg=8 ctermbg=0 guibg=DarkGrey guifg=Black
 hi sl_mode ctermfg=15 guifg=#ffffff  guibg=#094afe
 set lazyredraw "required by this function
 set laststatus=2
-hi sl_branch ctermfg=11 ctermbg=8
-hi sl_minor ctermfg=0 ctermbg=243
+hi sl_branch ctermfg=11 ctermbg=0 cterm=none
+
+hi TabLineFill ctermfg=0 ctermbg=0 cterm=none
+hi TabLine ctermfg=7 ctermbg=8 cterm=none
+hi TabLineSel ctermfg=0 ctermbg=7 cterm=none
+hi Title ctermfg=LightBlue ctermbg=Magenta
 
 
 set stl=
 set stl+=%{SLUpdateColor(mode())}%#sl_mode#\ %{toupper(mode())}
 set stl+=\ %*
-set stl+=%#sl_minor#\ %n:
+set stl+=\ %n:
 set stl+=\ %<%#sl_file#%F%*
 set stl+=%#sl_minor#%{&mod?'*':''}
 set stl+=%#sl_branch#%{SLGitBranch()}%*
-set stl+=%#sl_minor#
 set stl+=\ %h%r(%{SLFileSize()})
 if exists('ALEGetStatusLine()')
 	set stl+=%{ALEGetStatusLine()}
 endif
 set stl+=\ ❯\ %{&ft!=''?&ft:'No-FT'}
+set stl+=\ %{gutentags#statusline('❯\ GEN\ ')}
 set stl+=%{(&fenc!='utf-8'&&&fenc!='')?'\ \ >\ '.&fenc:''}
 set stl+=%{(&ff!='unix'&&&ff!='')?'\ \ >\ '.&ff:''}
 set stl+=%*
@@ -153,7 +153,7 @@ set stl+=\ %=
 " Symbols
 "set stl+={%{synIDattr(synID(line('.'),col('.'),1),'name')}}
 "set stl+=\ \%w(%b,0x%B)
-set stl+=\ %#sl_minor#%c%*
+set stl+=\ %c%*
 set stl+=\ (%l\ of\ %L)\ %P\ 
 " endSTATUSLINE }}}
 
@@ -166,9 +166,29 @@ nmap <leader>tp :setl paste!<CR>
 nmap <leader>ts :setl spell!<CR>
 nmap <Leader>tz :call ZenMode()<CR>
 nmap <Leader>tt :TagbarToggle<CR>
+nmap <Leader>rt :setl sw=4 ts=4 expandtab<CR>:retab!<CR>
+nmap <Leader>rT :setl sw=2 ts=2 <CR>:retab!<CR>
 
 " Reindent file
 nmap <leader>fi mzgg=G`z
+
+" Prettify JSON
+nnoremap =j :%!python -m json.tool<CR>
+vnoremap =j :%!python -m json.tool<CR>
+
+" Mappings for tabs
+noremap <Leader>1 1gt
+noremap <Leader>2 2gt
+noremap <Leader>3 3gt
+noremap <Leader>4 4gt
+noremap <Leader>5 5gt
+noremap <Leader>6 6gt
+noremap <Leader>7 7gt
+noremap <Leader>8 8gt
+noremap <Leader>9 9gt
+noremap <Leader>0 :tablast<CR>
+map <silent> <Leader>t :tabnew<CR>
+map <silent> <Leader>w :tabclose<CR>
 
 let b:zenmode = 0
 fu! ZenMode()
@@ -219,7 +239,7 @@ autocmd! User GoyoLeave nested call <SID>goyo_leave()
 " Append modeline after last line in buffer.
 " Use substitute() instead of printf() to handle '%%s' modeline in LaTeX files.
 function! AppendModeline()
-	let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :", &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+	let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d fdm=%s %set :", &tabstop, &shiftwidth, &textwidth, &foldmethod, &expandtab ? '' : 'no')
 	let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
 	call append(line("$"), l:modeline)
 endfunction
@@ -241,7 +261,7 @@ fu! SimpleFoldText()
 	let nl = v:foldend - v:foldstart + 1
 	let foldline = substitute(getline(v:foldstart), "^ *", "", 1)
 	let nextline = substitute(getline(v:foldstart + 1), "^ *", "", 1)
-	let txt = '+ ' .  foldline . repeat(' ', winwidth(0))
+	let txt = '+ ' .	foldline . repeat(' ', winwidth(0))
 	let info = ' ' . nl . ' lines '
 	let num_w = getwinvar(0, '&number') * getwinvar(0, '&numberwidth')
 	let fold_w = getwinvar(0, '&foldcolumn')
@@ -273,7 +293,6 @@ endf
 
 ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
-
 if !exists("*UpdateConfig")
 	fu! UpdateConfig()
 		:source $MYVIMRC
@@ -291,8 +310,8 @@ if has('autocmd')
 	au! BufWinEnter,FileType help :setl cc=0
 
 	" auto store/restore views
-	au! BufWinLeave ?* mkview
-	au! BufWinEnter ?* silent loadview
+	au! BufWinLeave ?* silent! mkview
+	au! BufWinEnter ?* silent! loadview
 
 	" Change date on pl scripts (irssi)
 	"au! BufWrite *.pl %s/changed\s=> '.*/="changed => '" . strftime("%c") . "',"/e
@@ -301,6 +320,11 @@ endif
 
 
 " Plugins
+set completeopt+=preview
+
+" Gutentags {{{
+let g:gutentags_project_root = ['.git', '.hg', '.bzr', '_darcs', '_darcs', '_FOSSIL_', '.fslckout', 'Makefile', 'project.json']
+" }}}
 
 " Goyo {{{
 let g:goyo_height=92
@@ -316,3 +340,29 @@ let g:tagbar_compact = 1
 let g:tagbar_show_visibility = 1
 let g:tagbar_iconchars = ['+', '-']
 " }}}
+
+" NeoMake {{{
+highlight NeomakeErrorSign ctermfg=9 ctermbg=234 cterm=bold
+highlight NeomakeWarningSign ctermfg=11 ctermbg=234 cterm=bold
+let g:neomake_warning_sign = {'text': '❕', 'texthl': 'NeomakeWarningSign'}
+
+let g:neomake_swift_enabled_makers = ['swiftc']
+autocmd! BufReadPost,BufWritePost *.swift Neomake
+
+"xcrun -sdk macosx swiftc
+
+" }}}
+
+" fzf {{{
+set rtp+=/usr/local/opt/fzf
+
+nnoremap <silent> <C-p> :call fzf#run({
+	\ 'down': '40%',
+	\ 'sink': 'botright split'})<CR>
+
+nnoremap <silent> <Leader>v :call fzf#run({
+	\ 'right': winwidth('.') / 2,
+	\ 'sink':  'vertical botright split'})<CR>
+" }}}
+
+" vim: set ts=4 sw=4 tw=0 fdm=marker noet ft=vim :
